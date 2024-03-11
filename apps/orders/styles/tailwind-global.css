@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.first-letter-1:first-letter {
+  font-size: 1rem;
+}
+
+.checkbox-neutral-soft {
+  background-color: var(--joy-palette-neutral-120);
+  span.MuiCheckbox-checkbox {
+    border: 0.125rem solid var(--joy-palette-neutral-870);
+    background-color: transparent;
+  }
+  &.Mui-disabled {
+    span.MuiCheckbox-checkbox {
+      border-color: var(--joy-palette-neutral-260);
+    }
+  }
+  &.Mui-checked {
+    background-color: var(--joy-palette-neutral-870);
+
+    label {
+      color: var(--joy-palette-common-white);
+    }
+
+    span.MuiCheckbox-checkbox {
+      background-color: var(--joy-palette-common-white);
+    }
+  }
+}
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  display: none;
+}
+::scrollbar {
+  display: none;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  display: none;
+}
+::scrollbar-track {
+  display: none;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  /* border-radius: 10px;
+  background: #006666;
+  -webkit-box-shadow: inset 0 0 1px #006666; */
+}
+::scrollbar-thumb {
+  /* border-radius: 10px;
+  background: #006666;
+  -webkit-box-shadow: inset 0 0 1px #006666; */
+}
+
+.cart-p {
+  & > div:first-child {
+    display: flex;
+    flex-grow: 0;
+    width: 5rem;
+  }
+
+  & > div:last-child {
+    display: flex;
+    flex-grow: 1;
+    overflow: visible;
+    height: fit-content;
+  }
+}
+
+/* .button-group
+  > :not([data-first-child]):not([data-last-child]):not(:only-child) {
+  &.rounded-3xl {
+    border-radius: 1.5rem;
+    &:hover {
+      border-color: transparent;
+    }
+  }
+} */

@@ -1,0 +1,8 @@
+version: "3"
+services:
+  api:
+    image: ${TAG}  # 使用哪个镜像
+    ports:
+      - "3300:3300"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'

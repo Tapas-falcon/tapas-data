@@ -1,0 +1,67 @@
+.tapas-icon-con > .MuiTypography-startDecorator {
+  margin-right: 0;
+}
+
+.tapas-datePicker .MuiPickersCalendarHeader-label{
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--joy-palette-neutral-870);
+}
+
+.tapas-datePicker .MuiPickersDay-root.Mui-disabled{
+  color: var(--joy-palette-neutral-260);
+}
+
+.tapas-datePicker .MuiPickersArrowSwitcher-spacer{
+  width: 3.8rem;
+}
+
+.tapas-datePicker .MuiPickersDay-today {
+  border: none;
+}
+
+.tapas-datePicker .MuiPickersDay-root{
+  color: var(--joy-palette-neutral-870);
+}
+
+.tapas-datePicker .MuiPickersDay-today::after {
+  position: absolute;
+  bottom: 5px;
+  background-color: var(--joy-palette-accent-500);
+  border-radius: 2px;
+  width: 4px;
+  height: 4px;
+  content: " ";
+}
+
+
+.tapas-datePicker .MuiPickersDay-root:hover{
+  background-color: var(--joy-palette-neutral-80);
+  border: none;
+}
+
+.tapas-datePicker .MuiPickersDay-root.Mui-selected{
+  background-color: var(--joy-palette-neutral-870);
+  color: var(--joy-palette-common-white);
+}
+
+.tapas-icon-con svg {
+  font-size: 1rem;
+  width: unset;
+  height: unset;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  display: none;
+}
+::scrollbar {
+  display: none;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  display: none;
+}
+::scrollbar-track {
+  display: none;
+}

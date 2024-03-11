@@ -1,0 +1,3 @@
+{
+  "extends": "@tapas/typescript-config/base.json"
+}

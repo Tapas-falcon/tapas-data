@@ -1,0 +1,17 @@
+{
+  "extends": "@tapas/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "strictNullChecks": false,
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
