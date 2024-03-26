@@ -5,9 +5,9 @@ export interface RequestParams {
     body?: Record<string, any>;
 }
 
-export type Sort<T> = { field: T; type: keyof typeof SortType };
+export type Sort<T> = { field: T;  values?: string[] | string;  type?: keyof typeof SortType };
 
-export type Filter = { field: string; values: string[]; search?: string };
+export type Filter = { field: string; values: string[] | string; search?: string };
 
 export type ListReqParams = {
     pageInfo?: {
@@ -44,7 +44,7 @@ export interface queryReq {
     filters?: Filter[];
     sorts?: Sort<string>[];
     search?: { value: string; searchBy: string[]; and?: boolean };
-    lang: LanguageCode;
+    //lang: LanguageCode; 这个已在axios里面全局实现
 }
 
 export interface createOrderParams {

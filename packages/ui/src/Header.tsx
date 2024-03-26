@@ -67,7 +67,7 @@ export default function Header({
         >
           <BackIcon size={32} />
         </IconButton>}
-      <Typography className="hidden md:inline-block" level="h1" fontSize="xl">
+      <Typography className="md:inline-block" level="h1" fontSize="xl">
         {pageTitle}
       </Typography>
       <IconButton className="inline-block md:hidden" variant="plain" color="neutral" onClick={() => onMenuClick()}>

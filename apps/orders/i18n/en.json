@@ -43,7 +43,8 @@
     "tableSize": "{size}-person",
     "submit": "Submit",
     "page": "page",
-    "RetailData": "Retail analytics"
+
+    "Revenue": "Retail analytics"
   },
   "dishes": {
     "menu": "Menu",

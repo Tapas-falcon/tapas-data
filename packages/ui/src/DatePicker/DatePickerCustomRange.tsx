@@ -31,6 +31,14 @@ export const DatePickerCustomRange: React.FC<DatePickerCustomRangeProps> =
     const [selected, setSelected] = useState<string[] | undefined>();
     // const defaultDisplayDates = [ // ];
     const [displayDates, setDisplayDates] = useState<(string[] | null)[]>([]);
+
+    //这里有bug 如果不做延时改变状态 元素会被直接移出 响应到上级事件的时候会捕获不到这个元素 让element.contains 检测失效
+    const iSetCurDateIndex=(value:number)=>{
+      requestAnimationFrame(e=>{
+        setCurDateIndex(value);
+      })
+    }
+
     if (years.length === 0) {
       const currentYear = (
         date[curDateIndex]?.toDate() ?? new Date()
@@ -87,7 +95,7 @@ export const DatePickerCustomRange: React.FC<DatePickerCustomRangeProps> =
     };
 
     const clear = () => {
-      setCurDateIndex(0);
+      iSetCurDateIndex(0);
       setDateVal(date[0] ?? null);
       const target = date[0]?.toDate?.();
       const anylabel = (localeText as any)[locale].LabelAny;
@@ -142,7 +150,7 @@ export const DatePickerCustomRange: React.FC<DatePickerCustomRangeProps> =
             onClick={() => {
               if (curDateIndex !== 0) {
                 resetSelected(0);
-                setCurDateIndex(0);
+                iSetCurDateIndex(0);
               }
             }}
             textColor={curDateIndex === 0 ? "neutral.870" : "neutral.260"}
@@ -174,7 +182,7 @@ export const DatePickerCustomRange: React.FC<DatePickerCustomRangeProps> =
             onClick={() => {
               if (curDateIndex !== 1) {
                 resetSelected(1);
-                setCurDateIndex(1);
+                iSetCurDateIndex(1);
               }
             }}
             textColor={curDateIndex === 1 ? "neutral.870" : "neutral.260"}
@@ -253,7 +261,7 @@ export const DatePickerCustomRange: React.FC<DatePickerCustomRangeProps> =
                 }}
                 className="ml-2"
                 onClick={() => {
-                  setCurDateIndex(1);
+                  iSetCurDateIndex(1);
                   resetSelected(1);
                 }}
               >

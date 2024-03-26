@@ -3,28 +3,35 @@ import Modal from '@mui/joy/Modal';
 //import ReactDOM from 'react-dom';
 import ModalDialog, {ModalDialogProps} from '@mui/joy/ModalDialog';
 import {ModalTypeMap} from "@mui/joy/Modal/ModalProps";
-import {BaseModalProps} from "@/components/base/types";
+import {BaseChildrenProps, BaseModalProps} from "@/components/base/types";
 import {Box, Button} from "@mui/joy";
 import ReactDOM from "react-dom/client";
 import services from "@/utils/services";
-export default class BaseModal extends Component<BaseModalProps>{
-    static open(props:BaseModalProps){
-        return new Promise((resolve, reject)=>{
-            services.open(BaseModal,{
-                ref:(modalRef:any)=>{
-                        if(modalRef){
-                            (modalRef as BaseModal).show();
-                            resolve(modalRef);
-                        }
-                    },
-                ...props
-            })
-        })
+import {RecoilRoot} from "recoil";
+import {OpenResult} from "@/utils/types";
+export default class BaseModal extends Component<BaseModalProps<BaseChildrenProps>>{
+    static open(props:BaseModalProps<BaseChildrenProps>,show=true){
+        let root=services.open(BaseModal,{
+            ref:(modalRef:any)=>{
+                if(modalRef){
+                    if(show)(modalRef as BaseModal).show();
+                    root.ref=modalRef;
+                }
+            },
+            ...props
+        });
+
+        return root;
+    }
+    static modal(props:BaseModalProps<BaseChildrenProps>){
+        return this.open(props,false);
     }
     state={
         visible:false,
         okLoading:false,
-        cancelLoading:false
+        cancelLoading:false,
+        cancelDisabled:false,
+        okDisabled:false
     };
     async  onCancel(){
         let {onCancel}=this.props;
@@ -69,11 +76,22 @@ export default class BaseModal extends Component<BaseModalProps>{
     getContentRef(){
         return this.contenter;
     }
+    isFunctionalComponent(Component:any) {
+        //!!(Component && Component.prototype && !Component.prototype.isReactComponent);
+        return !!(Component && Component.prototype && !Component.prototype.isReactComponent);
+    }
 
+    setCancelDisabled(value:boolean){
+        this.setState({cancelDisabled:value})
+    }
+    setOkDisabled(value:boolean){
+        this.setState({okDisabled:value})
+    }
     render() {
-        let {visible,okLoading,cancelLoading}=this.state;
+        let {visible,okLoading,cancelLoading,cancelDisabled,okDisabled}=this.state;
         let {children:Children,childrenProps={},modalProps={},modalDialogProps={},modalBoxClass,modalBoxContentClass,textCancel,textOk,footer,hiddenCancel,hiddenOk}=this.props;
-
+        let isChildrenFunCom=!this.isFunctionalComponent(Children);
+        let propsRef=isChildrenFunCom?{}:{ref:(ref:any)=>this.setContentRef(ref,'contenter')};
         return  (
           <Modal
             aria-labelledby="modal-title"
@@ -91,17 +109,17 @@ export default class BaseModal extends Component<BaseModalProps>{
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 0,
-                    width: '45rem',
-                    height:"34rem"
                 }}
                 className={'p-0'}
                 {...modalDialogProps}
               >
                   <Box className={`${modalBoxClass||""}`}>
                       <Box className={`${modalBoxContentClass||''} p-4`}>
-                          {(Children as any) instanceof Function? <Children  ref={(ref:any)=>this.setContentRef(ref,'contenter')} modal={this} {...childrenProps}/>:Children}
+                          <RecoilRoot>
+                              {(Children as any) instanceof Function? <Children {...propsRef} modal={this} {...childrenProps}/>:Children}
+                          </RecoilRoot>
                       </Box>
-                      <Box className={`footer-dialog flex row justify-end items-center p-4 border-solid border-0  border-t border-gray-100`}>
+                      <Box className={`footer-dialog flex row justify-end items-center p-4 border-solid border-0  border-t border-gray-100 gap-2`}>
                           {
                               footer?footer:(
                                 <>
@@ -112,17 +130,19 @@ export default class BaseModal extends Component<BaseModalProps>{
                                           color="neutral"
                                           className="rounded-[360px] h-10 min-w-20"
                                           loading={cancelLoading}
+                                          disabled={cancelDisabled}
                                           onClick={() => this.onCancel()}
                                         >{textCancel||'Cancel'}</Button>
                                       )
                                     }
                                     {
-                                        !hiddenOk&&(
+                                      !hiddenOk&&(
                                         <Button
                                           variant="solid"
                                           color="neutral"
                                           className="rounded-[360px] h-10 min-w-20"
                                           loading={okLoading}
+                                          disabled={okDisabled}
                                           onClick={() => this.onOk()}
                                         >{textOk||'Ok'}</Button>
                                       )

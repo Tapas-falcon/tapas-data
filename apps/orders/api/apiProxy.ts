@@ -1,4 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
+import {useIntl} from "next-intl";
+import services from "@/utils/services";
 
 export const API_URL = process.env.NODE_ENV === 'development' ? "http://localhost:4080" : "/api";
 
@@ -13,8 +15,12 @@ export function getAxios(config?: AxiosRequestConfig): AxiosInstance {
 
   // 添加请求拦截器
   instance.interceptors.request.use(
-    function (config: any) {
+    function (config) {
       // 在发送请求之前做些什么
+      if(!config.params)config.params={};
+      Object.assign(config.params,{
+        lang:services.locale
+      })
       // console.log("before request:", config)
       // config.headers.Authorization = localStorage.get("tapas_token")
       return config
@@ -31,12 +37,12 @@ export function getAxios(config?: AxiosRequestConfig): AxiosInstance {
       // 对响应数据做点什么
       // console.log("before response:", response)
       const { code, data, message } = response.data
-      if (code === 200) return data
+      if (code === 200) return response
       else if (code === 401) {
         //  jumpLogin()
       } else {
          console.error(message)
-         return Promise.reject(response.data)
+         return Promise.reject(response)
       }
     },
     function (error) {

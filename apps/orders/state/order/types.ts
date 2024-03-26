@@ -5,7 +5,14 @@ export interface OrderState {
     curOrder?: Order;
     orderList?: Order[];
 }
-
+export interface OrderTabResultState{
+    pageSize:number;
+    pageIndex:number;
+    totalCount:number;
+    totalPages:number;
+    next:boolean;
+    data:any[]
+}
 export interface OrderWithTable {
     orderId: string;
     tableId: string;

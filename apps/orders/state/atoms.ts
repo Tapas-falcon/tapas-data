@@ -56,4 +56,3 @@ export const alertState = atom<AlertState>({
     action: () => {}
   },
 });
-

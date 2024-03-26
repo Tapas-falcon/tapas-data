@@ -8,7 +8,8 @@ import JSX = jsx.JSX;
 
 export interface ISelectItem {
     key: string|number;
-    text: string;
+    text: string|React.ReactElement;
+    label?:string;
 }
 
 export interface IAdditionalSelectProps {
@@ -48,7 +49,7 @@ export const Select: React.FC<ISelectProps> = function({
     }, [isListOpen, value]);
 
     let itemsFc=(items instanceof Array)?items.map((item) => {
-        return <JoyOption key={item.key} value={item.key} className='flex justify-between'>
+        return <JoyOption key={item.key} value={item.key} label={item.label||item.text} className='flex justify-between'>
             {item.text} {value === item.key ? <IconCheck color='#F55523'/> : <div></div>}
         </JoyOption>
     }):items;

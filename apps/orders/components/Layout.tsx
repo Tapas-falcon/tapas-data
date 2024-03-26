@@ -109,7 +109,7 @@ export default function Layout({ children, secondaryNav }: LayoutProps) {
     >
       {/* Left navigation bar */}
       <Nav
-        className="hidden md:flex"
+        className=" md:flex"
         iconImg={<Image src={logo} alt="icon of tapas" fill={true}></Image>}
         path={router.pathname.substring(1)}
         onNav={onNav}

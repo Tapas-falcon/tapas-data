@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import Button from "@mui/joy/Button";
 
 import { countState } from "@/state/atoms";
-
+import Icons from "@tapas/ui/icons"
 export default function Index() {
   const t = useTranslations("common");
   const [count, setCount] = useRecoilState(countState);

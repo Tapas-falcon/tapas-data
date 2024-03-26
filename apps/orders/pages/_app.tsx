@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import {ReactElement, ReactNode, useEffect} from "react";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -12,10 +12,14 @@ import { unstable_noStore as noStore } from 'next/cache'
 import ThemeProvider from "@/components/ThemeProvider";
 import { ConfirmProvider } from "@tapas/ui/Confirm";
 import Layout from "@/components/Layout";
+import ZH from "@/i18n/zh.json";
+import EN from "@/i18n/en.json";
+
 
 import "animate.css";
 import "@/styles/tailwind-global.css";
 import '@/styles/i-css.css';
+import services from "@/utils/services";
 // import '@tapas/ui/styles.css'  // 配置这个是使用ui自身tailwind编译的结果，开发时需要同时跑ui的dev。 目前采取配置相对路径"../../packages/ui/**/*.{js,ts,jsx,tsx,mdx}"的方式直接生效
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -29,11 +33,19 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
   noStore();
+  console.log(router,'router')
+  let {locale}=router;
+  let language:Record<string, any>={
+    zh:ZH,
+    en:EN
+  };
+  let messages=language[locale];
+  services.locale=locale;
   return (
     <ThemeProvider>
       <NextIntlClientProvider
-        locale={router.locale}
-        messages={pageProps.messages}
+        locale={locale}
+        messages={messages}
       >
         <RecoilRoot>
           <Head>
