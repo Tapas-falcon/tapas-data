@@ -40,11 +40,14 @@ export interface pageInfo {
 }
 
 export interface queryReq {
-    pageInfo: pageInfo;
+    pageInfo?: pageInfo;
     filters?: Filter[];
     sorts?: Sort<string>[];
     search?: { value: string; searchBy: string[]; and?: boolean };
     //lang: LanguageCode; 这个已在axios里面全局实现
+}
+export interface statisticsQueryReq extends queryReq{
+    page:string;
 }
 
 export interface createOrderParams {

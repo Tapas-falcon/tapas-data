@@ -17,12 +17,12 @@ export const DetailsModal:React.FC<DetailsModalProps>=(props)=>{
             tableList.map(table=> (
               <div className={`mb-4 flex justify-center`}>
                 <table className={`w-full border-0`} style={{borderCollapse: "collapse"}}>
-                  <thead className={`bg-neutral-100 text-sm leading-6 text-neutral-500`}>
+                  <thead className={`bg-neutral-100 text-sm leading-6 text-neutral-500 ${!table.header?'hidden':''}`}>
                   <tr>
                     <th className={`w-4`}></th>
                     {
-                      table.columns.map(item=> (
-                        <th className={`p-1`} {...item.thProps}>{item.title}</th>
+                      table.columns.map((item,index)=> (
+                        <th  {...item.thProps} className={`p-1 ${index===0?'text-left':'text-right'}  ${item.thProps?.className??''}`}>{item.title}</th>
                       ))
                     }
                     <th className={`w-4`}></th>
@@ -34,12 +34,12 @@ export const DetailsModal:React.FC<DetailsModalProps>=(props)=>{
                       <tr>
                         <td className={`w-4`}></td>
                         {
-                          table.columns.map(item=> {
+                          table.columns.map((item,index)=> {
                             let content=dataItem[item.column];
                             if(item.renderItem){
                               content=item.renderItem(item.column,content,dataItem);
                             }
-                            return <td className={`p-1`} {...item.tdProps}>{content}</td>;
+                            return <td  {...item.tdProps} className={`p-1 pt-1.5 pb-1.5 ${index===0?'text-left':'text-right'} ${item.tdProps?.className??''}`}>{content}</td>;
                           })
                         }
                         <td className={`w-4`}></td>

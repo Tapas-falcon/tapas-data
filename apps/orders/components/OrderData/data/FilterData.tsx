@@ -41,7 +41,6 @@ export const FxOptionsData:FxOptionsDataType[]=[
   {key:FxValue.DEF,label:"None",desc:"",desc2:""},
   {key:FxValue.Y,label:`Calculate vertically`,desc:"Show mean value and sum vertically",desc2:"Calculate mean value and sum in vertical format"},
   {key:FxValue.X,label:`Calculate horizontally`,desc:"Show mean value and sum horizontally",desc2:"Calculate mean value and sum in horizontal format"},
-
 ];
 export const FxOptions: ISelectItem[] = FxOptionsData.map(item=>{
   return {key:item.key,label:item.label,text:item.key===DEFAULT?item.label:<FxOptionsItem text={item.label} desc={item.desc}/>}

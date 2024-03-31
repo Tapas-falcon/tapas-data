@@ -5,7 +5,7 @@ import Paging from "./Paging";
 import React, {useEffect, useRef, useState} from "react";
 
 export interface IOrderListTablePropsColumns{
-    title: string;
+    title: string|React.ReactElement;
     column:string;
     thProps?:Record<string, any>;
     tdProps?:Record<string, any>;
@@ -20,6 +20,7 @@ export interface IOrderListTableProps {
     actions?: string[];
     onActionClick?: (action: string, order: Order) => void;
     renderItem?:IOrderListTablePropsColumns['renderItem'],
+    footer?:React.ReactElement[]
 }
 
 
@@ -32,6 +33,7 @@ export const OrderListTable: React.FC<IOrderListTableProps> = ({
     actions=[],
     onActionClick=() => {},
     renderItem,
+    footer=[]
 
 }) => {
     // get the ref of pagging
@@ -120,8 +122,7 @@ export const OrderListTable: React.FC<IOrderListTableProps> = ({
                                         }else if(renderItem){
                                             value = renderItem(colKey,value,item)
                                         }
-
-                                        return <td key={index} {...column.tdProps}>{value}</td>
+                                        return <td key={index} {...column.tdProps} onClick={e=>column?.tdProps?.onClick&&column?.tdProps?.onClick(colKey,value,item,columns)}>{value}</td>
                                     })
                                 }
                                 {
@@ -151,6 +152,9 @@ export const OrderListTable: React.FC<IOrderListTableProps> = ({
                         ))
                     }
                 </tbody>
+                <tfoot>
+                {footer.map(f=>f)}
+                </tfoot>
             </Table>
         </Sheet>
 

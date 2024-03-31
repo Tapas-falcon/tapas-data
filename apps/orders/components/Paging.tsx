@@ -135,7 +135,7 @@ export const Paging: React.FC<IPagingProps> = ({
             >
                 {
                     // 生成分页器数据
-                    [1,5,10,20,30,40,50].map(val => (
+                    [10,20,30,40,50].map(val => (
                         <JoyOption key={`joy-${val}`} value={val}>{val} / {t("page")}</JoyOption>
                     ))
                 }

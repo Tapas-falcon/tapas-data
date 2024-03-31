@@ -3,7 +3,7 @@ import {SelectProps as JoySelectProps} from "@mui/joy/Select/SelectProps";
 import React from "react";
 import {IOrderListTablePropsColumns} from "@/components/OrderListTable";
 import {DatePickerProps, TabsValues} from "@tapas/ui/DatePicker";
-import {DEFAULT} from "@/define";
+import {CUSTOM as _CUSTOM, DEFAULT} from "@/define";
 
 export interface FormItemBase<T>{
   value?:T;
@@ -39,6 +39,8 @@ export interface IAdditionalSortSelectProps{
 export enum FxValue{
   X='x',
   Y='y',
+  ALLY='ally',
+  ONE='one',
   DEF = DEFAULT
 }
 export type SortSelectProps = IAdditionalSortSelectProps & JoySelectProps<string, false>;
@@ -47,4 +49,12 @@ export interface FxOptionsDataType{
   label:string;
   desc:string;
   desc2:string;
+}
+export enum DateRadiusViewValue {
+  DEF=DEFAULT,
+  WEEK="1",
+  MONTH="2",
+  YEAR="3",
+  HOUR="4",
+  CUSTOM=_CUSTOM,
 }

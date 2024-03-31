@@ -24,6 +24,7 @@ export interface TabListItem extends Record<string, any>{
   //details:{value:string,name:string}
 }
 export interface TabDataTable{
-  columns?:IOrderListTablePropsColumns[]
-  list:TabListItem[]
+  columns:(IOrderListTablePropsColumns&{isStore?:boolean})[]
+  list:TabListItem[],
+  footer?:React.ReactElement[]
 }

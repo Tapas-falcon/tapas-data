@@ -46,16 +46,18 @@ export interface ConfirmModalProps extends BaseChildrenProps{
   desc:string|React.ReactElement;
 }
 export interface DetailsModalPropsTableColumns extends IOrderListTablePropsColumns{
+
 }
 export interface DetailsModalPropsTable{
   columns:DetailsModalPropsTableColumns[];
+  header:boolean;
   data:any[]
 }
 export interface DetailsModalProps extends BaseChildrenProps{
   name:string;
   status:string;
   desc:string;
-  tableList:DetailsModalPropsTable[]
+  tableList?:DetailsModalPropsTable[]
 
 }
 

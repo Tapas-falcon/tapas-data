@@ -5,7 +5,7 @@ import Checkbox from '@mui/joy/Checkbox';
 import Input from '@mui/joy/Input';
 import {SearchIcon,CloseIcon} from "@tapas/ui/icons"
 import {TextHighlight} from "@/components/OrderData/filter/TextHighlight";
-import {getStores} from "@/api/orderData";
+import {getStores} from "@/api/orderDataAPI";
 import {Button} from "@mui/joy";
 
 export const StoresFilter:React.FC<StoresFilterProps>=(props)=>{

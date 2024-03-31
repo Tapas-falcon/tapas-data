@@ -20,6 +20,9 @@ import "animate.css";
 import "@/styles/tailwind-global.css";
 import '@/styles/i-css.css';
 import services from "@/utils/services";
+import * as moment from 'moment';
+import 'moment-timezone';
+moment.tz.setDefault('Asia/Shanghai');
 // import '@tapas/ui/styles.css'  // 配置这个是使用ui自身tailwind编译的结果，开发时需要同时跑ui的dev。 目前采取配置相对路径"../../packages/ui/**/*.{js,ts,jsx,tsx,mdx}"的方式直接生效
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

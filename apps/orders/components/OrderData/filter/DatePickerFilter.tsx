@@ -15,6 +15,7 @@ export const DatePickerFilter:React.FC<DatePickerFilterProps>=(props)=>{
   const [orderDataParams,setOrderDataParams]=useRecoilState(orderDataParamsState);
   const [isSelect,setIsSelect]=useState(true);
   const [dateType,setDateType]=useState('default');
+  const [text,setText]=useState('Anytime');
   const dropDownRef=useRef<any>({});
   const onSelect=(value:any)=>{
     setDateType(value);
@@ -29,10 +30,13 @@ export const DatePickerFilter:React.FC<DatePickerFilterProps>=(props)=>{
       onChange(value);
     }
   }
-  let text='Anytime';
-  if(Array.isArray(value)){
-    text=`${moment(value[0]).format(MOMENTFORMAT1)}~${moment(value[1]).format(MOMENTFORMAT1)}`;
-  }
+  useEffect(() => {
+    let text='Anytime'
+    if(Array.isArray(value)&&value.some(v=>!!v)){
+      text=`${moment(value[0]).format(MOMENTFORMAT1)}~${moment(value[1]).format(MOMENTFORMAT1)}`;
+    }
+    setText(text);
+  }, [value]);
   if(isSelect){
     return <Select items={options} value={(Array.isArray(value)?DEFAULT:value) as string} onChange={(e,value)=>onSelect(value)}/>;
   }

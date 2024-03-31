@@ -105,6 +105,9 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      moment-timezone:
+        specifier: ^0.5.45
+        version: 0.5.45
       next:
         specifier: ^14.0.3
         version: 14.0.4(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
@@ -9346,6 +9349,12 @@ packages:
     hasBin: true
     dependencies:
       commander: 10.0.1
+    dev: false
+
+  /moment-timezone@0.5.45:
+    resolution: {integrity: sha512-HIWmqA86KcmCAhnMAN0wuDOARV/525R2+lOLotuGFzn4HO+FH+/645z2wx0Dt3iDv6/p61SIvKnDstISainhLQ==, tarball: https://registry.npmmirror.com/moment-timezone/-/moment-timezone-0.5.45.tgz}
+    dependencies:
+      moment: 2.30.1
     dev: false
 
   /moment@2.30.1:

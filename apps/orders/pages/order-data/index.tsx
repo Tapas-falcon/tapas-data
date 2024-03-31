@@ -16,7 +16,7 @@ import React, {useEffect, useState} from "react";
 import {IOrderListTablePropsColumns} from "@/components/OrderListTable";
 import {RetailAnalyticsFilter} from "@/components/OrderData/filter";
 import {useRecoilState} from "recoil";
-import {orderTabResultState} from "@/state/order/order.atoms";
+import {orderDataParamsState, orderTabResultState} from "@/state/order/order.atoms";
 import {renderSumDetailsItem} from "@/components/OrderData/Render";
 import openConfirmModal from "@/components/base/ConfirmModal";
 import {openValuesExcludedModal} from "@/components/OrderData/modal/ValuesExcludedModal";
@@ -28,7 +28,7 @@ import {
 import {TabsDataItem} from "@/components/OrderData/type";
 import {headerState} from "@/state/atoms";
 import {OrderDetail} from "@/components/OrderData/OrderDetail";
-import {getStores} from "@/api/orderData";
+import {getStores} from "@/api/orderDataAPI";
 
 
 export default function OrderData() {
@@ -44,6 +44,8 @@ export default function OrderData() {
 
 	const {filterList, tableHeader, tableHeaderPlaceholder, onScroll} = useTableScroll();
 	let [orderTabState,setOrderTabState]=useRecoilState(orderTabResultState);
+	const [orderDataParams,setOrderDataParams]=useRecoilState(orderDataParamsState);
+
 	let tabs:TabsDataItem[]=getRetailAnalyticsTabsData();
 	for (let tab of tabs){
 		tab.context=useOrderListContextState(tab.name);
@@ -81,6 +83,7 @@ export default function OrderData() {
 
 	useEffect(() => {
 		setTabName(queryTabName as string);
+
 		if(belongToOrderDetailTabs(queryTabName as OrderDetailsEnum)){
 			setHeader({
 				title:t(queryTabName),
