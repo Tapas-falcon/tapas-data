@@ -120,9 +120,9 @@ function Nav({className, collapse, iconImg, path, onNav, onCollapseChange}: Prop
           }
         })}
       >
-        <IconButton variant={index === 0 ? 'soft' : 'solid'} color="primary" onClick={() => onSelectItem(0)} size="md">
+        {/*<IconButton variant={index === 0 ? 'soft' : 'solid'} color="primary" onClick={() => onSelectItem(0)} size="md">
           <OrderingIcon size={20}/>
-        </IconButton>
+        </IconButton>*/}
         <IconButton variant={index === 1 ? 'soft' : 'solid'} color="primary" onClick={() => onSelectItem(1)} size="md">
           <OrderListIcon size={20}/>
         </IconButton>
