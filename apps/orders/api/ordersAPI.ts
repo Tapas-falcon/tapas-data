@@ -56,6 +56,7 @@ export type OrderQueryParams = {
   checkoutBy?: string;
   cancelBy?: string;
   page?: number;
+  stores?:string;
 }
 
 export const getOrdersAPI = ({
@@ -66,7 +67,8 @@ export const getOrdersAPI = ({
   createdBy='default',
   checkoutBy='default',
   cancelBy='default',
-  page=1
+  page=1,
+  stores
 }: OrderQueryParams): Promise<any> => {
   const query = qs.stringify({
     status,
@@ -76,7 +78,8 @@ export const getOrdersAPI = ({
     createdBy,
     checkoutBy,
     cancelBy,
-    page
+    page,
+    stores
   })
   const header = new Headers();
   header.append("Content-Type", "application/json");

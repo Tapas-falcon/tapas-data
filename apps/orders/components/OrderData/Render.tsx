@@ -9,6 +9,7 @@ import {useRecoilState} from "recoil";
 import {orderDataParamsState} from "@/state/order/order.atoms";
 import moment from "moment";
 import {MOMENTFORMAT1, MOMENTFORMAT2, MOMENTFORMAT3} from "@/define";
+import {isOrders} from "@/components/OrderData/data/FilterData";
 
 export const CardData:React.FC<CardDataProps>=({list=[]})=>{
   return (
@@ -27,18 +28,29 @@ export const CardData:React.FC<CardDataProps>=({list=[]})=>{
     </div>
   );
 }
-export const renderSumDetailsItem:IOrderListTablePropsColumns['renderItem']=(colKey, current, item)=>{
+export const renderSumDetailsItem=(colKey:string, current:any, item:any,page:string)=> {
+  const _isOrders=isOrders(page);
+  let value=priceFormat(current?.value,'');
+  if(_isOrders){
+    value=Number(current?.value).toString();
+  }
+
+  if (!current?.details || [].length) return <span >{value}</span>;
   return (
-    <Tooltip variant="plain" disableHoverListener={!+current?.value} title={<CardData list={current?.details||[]}/>} sx={{padding:"0.75rem","--joy-palette-background-surface":"var(--joy-palette-common-white)"}}>
-      <span className={`cursor-pointer`}>{(Number(current?.value||0).toFixed(2))}</span>
+    <Tooltip variant="plain" disableHoverListener={!+current?.value} title={
+      <CardData list={current?.details || []}/>} sx={{
+      padding: "0.75rem",
+      "--joy-palette-background-surface": "var(--joy-palette-common-white)"
+    }}>
+      <span className={`cursor-pointer`}>{value}</span>
     </Tooltip>
   );
 }
-export const renderDetailsModalItem=(colKey:string, value:number, item:any)=>{
-  if(['value'].includes(colKey)){
+export const renderDetailsModalItem = (colKey: string, value: number, item: any) => {
+  if(['value','sum','mean'].includes(colKey)){
     return (['orders'].includes(item.type)?value:priceFormat(value)).toString();
   }
-  return  (value||'').toString();
+  return  (value||'0').toString();
 };
 export const renderPriceItem=(colKey:string, value:number, item:any)=>{
   return priceFormat(value,item.unit||'').toString();

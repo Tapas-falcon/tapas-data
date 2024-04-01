@@ -45,3 +45,4 @@ export const FxOptionsData:FxOptionsDataType[]=[
 export const FxOptions: ISelectItem[] = FxOptionsData.map(item=>{
   return {key:item.key,label:item.label,text:item.key===DEFAULT?item.label:<FxOptionsItem text={item.label} desc={item.desc}/>}
 });
+export const isOrders=(page:string)=>  (page==='Orders');

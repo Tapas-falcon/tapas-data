@@ -4,6 +4,7 @@
     "description": "使用来自 <code>./i18n/{locale}.json</code> 和 <code>./i18n/demo/{locale}.json</code>. 其他消息未加载.",
     "lastUpdated": "例子更新于 {lastUpdatedRelative} ({lastUpdated, date, short}).",
 
+    "View": "详情",
     "Confirm": "确认",
     "Cancel": "取消",
     "Confirm-pay": "确认支付",
@@ -14,6 +15,7 @@
     "Quantity": "数量",
     "Total": "总计",
     "TOTAL": "总计",
+    "RequestFailed": "请求失败",
 
     "OrderList": "订单列表",
     "WithdrawCash": "结账",
@@ -58,10 +60,17 @@
     "checkoutAndPay": "结算 & 支付",
     "IVA": "IVA%",
     "BASEIMP": "BASE IMP",
-    "IMPIVA": "IMP IVA"
+    "IMPIVA": "IMP IVA",
+    "OrderSuccess": "订单成功！",
+    "OrderFailed": "订单失败，请稍后重试",
+    "OrderSubmited": "订单已提交"
   },
   "dailySettlement": {
     "Title": "当日营收报告",
+    "ReportByAnyone": "所有报告人",
+    "AllReportStatus": "所有报告状态",
+    "DateOfReport": "报告时间: 任意时间",
+    "PageTotal": "总数: {num}",
     "ReportID": "报告ID",
     "TodayIncome": "当日收入",
     "TotalPOSIncome": "POS机收入总额",
@@ -83,12 +92,29 @@
     "ProductRecordsDesc": "提交后，您可以在第二天中午之前添加更多产品。",
     "RevenueDetailsTitle": "收入详情",
     "TotalCashIncomeLabel": "现金收入总额（欧元）",
+    "TotalCashRevenue": "现金总收入",
     "TotalPOSRevenue": "POS机总收入",
-    "TotalCashWithDrawalEuro":"现金提取总额 (欧元)",
-    "DailyOPerationCash":"日常运营现金（欧元）",
+    "TotalCashWithDrawalEuro": "现金提取总额 (欧元)",
+    "DailyOPerationCash": "日常运营现金（欧元）",
     "AddExceededProductTitle": "添加一个或多个已售商品",
     "BtnClearAll": "清除所有",
-    "BtnAddItems": "添加 {num} 项"
+    "BtnAddItems": "添加 {num} 项",
+    "AlertModalTitle": "今天的报告已经存在。",
+    "AlertModalDesc": "您一天只能添加一份报告。如果您想重新提交新报告，请先联系您的经理。",
+    "AlertModalBtn": "查看报告",
+    "SubmittedBy": "提交人",
+    "SubmittedOn": "提交时间",
+    "CancelReport": "取消报告？",
+    "BtnCancelReport": "取消报告",
+    "CancelReportDesc": "一旦取消，所有数据将不会被保存。",
+    "SubmitRptFailedTitle": "提交报告失败！",
+    "SubmitRptSuccessTitle": "报告已提交",
+    "GetReportFailed": "获取报告失败",
+    "GenerateNewReportFailed": "生成新报告失败",
+    "GetReprotListFailed": "获取报告列表失败",
+    "SubmitReportWithError": "发现错误计算报告",
+    "SubmitReportWithErrorDesc": "报表总收入不等于今天的总收入。是否继续？",
+    "BtnSubmitReportWithError": "忽略并提交"
   },
   "withdraw": {
     "RecordDate": "Date of record: {value}",
@@ -135,6 +161,13 @@
     "Any": "任意",
     "CreatedByAnyone": "任何创建人",
     "CheckoutByAnyone": "任何结账人",
-    "CancelledByAnyone": "任何取消人"
+    "CancelledByAnyone": "任何取消人",
+    "DiscountAmout": "折扣金额",
+    "MembershipID": "会员ID"
+  },
+  "orderDetail": {
+    "OrderDetail": "订单详情",
+    "OrderInfo": "订单信息",
+    "TableInfo": "桌台信息"
   }
 }

@@ -45,6 +45,7 @@ export default function OrderData() {
 	const {filterList, tableHeader, tableHeaderPlaceholder, onScroll} = useTableScroll();
 	let [orderTabState,setOrderTabState]=useRecoilState(orderTabResultState);
 	const [orderDataParams,setOrderDataParams]=useRecoilState(orderDataParamsState);
+	const completedTabContext = useOrderListContextState(OrderDetailsEnum.List);
 
 	let tabs:TabsDataItem[]=getRetailAnalyticsTabsData();
 	for (let tab of tabs){
@@ -60,7 +61,7 @@ export default function OrderData() {
 	 */
 	const columns:IOrderListTablePropsColumns[]=[
 		{title:"",column:"date"},
-		{title:"Store A",column:"storeA",renderItem:renderSumDetailsItem,tdProps:{onClick:()=>{
+		{title:"Store A",column:"storeA",renderItem:(colKey, value, item)=>renderSumDetailsItem(colKey, value, item,queryTabName as string),tdProps:{onClick:()=>{
 					route.push(`/order-data?tab=orderDetailsList&id=1`);
 
 				}}},
@@ -144,7 +145,15 @@ export default function OrderData() {
 							</TabPanel>
 						))
 					}
-					<TabPanel value={"orderDetails"} className='p-0'>
+					<TabPanel value={OrderDetailsEnum.List} className='p-0'>
+						<orderListContext.Provider value={completedTabContext}>
+							<CompletedTabContent
+								tableHeader={tableHeader}
+								tableHeaderPlaceholder={tableHeaderPlaceholder}
+								filterList={filterList} columns={[]}/>
+						</orderListContext.Provider>
+					</TabPanel>
+					<TabPanel value={OrderDetailsEnum.Detail} className='p-0'>
 						<OrderDetail/>
 					</TabPanel>
 				</Tabs>

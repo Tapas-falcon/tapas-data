@@ -1,24 +1,26 @@
 import { useCompletedTabContent, useOrderListStateFromContext, useTableScroll } from "../../hooks/orderListHooks";
-import { OrderListTable } from "@/components/OrderListTable";
+import {IOrderListTablePropsColumns, OrderListTable} from "@/components/OrderListTable";
 import { MoreVertIcon, ArrowDropDownIcon } from "@tapas/ui/icons";
 import { ISelectItem, Select } from "@tapas/ui/Select";
 import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import Paging from "@/components/Paging";
 import { IOrderListTabContentProps, orderListContext } from "../../state/orderList/state";
-import { Order } from "@/state/order/types";
+import { Order, OrderStatus } from "@/state/order/types";
 import { getOrdersAPI, getOrdersCheckoutByAPI, getOrdersCreateByAPI } from "@/api/ordersAPI";
 import { OrderDatePicker } from "./OrderDatePicker";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 
 export const CompletedTabContent: React.FC<IOrderListTabContentProps> = ({
-    tableHeader,
-    tableHeaderPlaceholder,
-    filterList
-}) => {
+                                                                             tableHeader,
+                                                                             tableHeaderPlaceholder,
+                                                                             filterList
+                                                                         }) => {
+    const router = useRouter();
     const t = useTranslations("common");
     const orderListTranslate = useTranslations("orderList");
-    const mockColumns = [
+    const mockColumns:IOrderListTablePropsColumns[] = [
         { title: orderListTranslate("OrderID"), column: "id" },
         { title: t("OrderType"), column: "orderType" },
         { title: t("Table"), column: "tableInfo.name" },
@@ -33,6 +35,13 @@ export const CompletedTabContent: React.FC<IOrderListTabContentProps> = ({
         { title: orderListTranslate("CheckoutOn"), column: "checkoutAt" },
         { title: orderListTranslate("PaymentOperator"), column: "paymentOperatorName" }
     ];
+    mockColumns.forEach(column=>{
+        column.tdProps={
+            onClick:(colKey:string,value:any,item:any,columns:IOrderListTablePropsColumns[])=>{
+                router.push(`/ordering/order-detail?id=${item._id}`);
+            }
+        };
+    })
 
     const { context, setContext, key } = useContext(orderListContext);
     const [list, setList] = useState([]);
@@ -84,12 +93,13 @@ export const CompletedTabContent: React.FC<IOrderListTabContentProps> = ({
 
     useEffect(() => {
         getOrdersAPI({
-            status: "Completed",
+            //status: OrderStatus.Completed,
             orderType: queryOrderType,
             createdAt: createDate,
             createdBy,
             checkoutBy,
-            page: currentPage
+            page: currentPage,
+            stores: router.query.stores as string
         }).then((res) => {
             if (res?.data) {
                 setList(res.data);
@@ -107,11 +117,11 @@ export const CompletedTabContent: React.FC<IOrderListTabContentProps> = ({
         }}>
             <div className="inline-flex gap-2">
                 <Select
-                    value={queryOrderType}
-                    items={orderTypes}
-                    onChange={(e, val) => {
-                        setQueryOrderType(val)
-                    }}
+                  value={queryOrderType}
+                  items={orderTypes}
+                  onChange={(e, val) => {
+                      setQueryOrderType(val)
+                  }}
                 />
 
                 <OrderDatePicker value={createDate} prefix={orderListTranslate("DateOfCreation")} onDateChange={(date) => {
@@ -123,34 +133,34 @@ export const CompletedTabContent: React.FC<IOrderListTabContentProps> = ({
                 }}></OrderDatePicker>
 
                 <Select
-                    value={createdBy}
-                    items={createdByList}
-                    onChange={(e, val) => {
-                        setCreatedBy(val);
-                        context.createdBy = val;
-                        setContext(context);
-                    }}
+                  value={createdBy}
+                  items={createdByList}
+                  onChange={(e, val) => {
+                      setCreatedBy(val);
+                      context.createdBy = val;
+                      setContext(context);
+                  }}
                 />
 
                 <Select
-                    value={checkoutBy}
-                    items={checkoutByList}
-                    onChange={(e, val) => {
-                        setCheckoutBy(val);
-                        context.checkoutBy = val;
-                        setContext(context);
-                    }}
+                  value={checkoutBy}
+                  items={checkoutByList}
+                  onChange={(e, val) => {
+                      setCheckoutBy(val);
+                      context.checkoutBy = val;
+                      setContext(context);
+                  }}
                 />
 
             </div>
 
         </div>
         <OrderListTable
-            columns={mockColumns as { title: string, column: Exclude<keyof Order, "orders" | "tableInfo"> }[]} // 这里未了避免类型校验报错我强行同化了类型 再解决了上面的类型冲突后这里要去掉恢复到正常校验
-            orders={list}
-            tableHeader={tableHeader}
-            tableHeaderPlaceholder={tableHeaderPlaceholder}
-            paging={<Paging current={currentPage} total={totalPage} onChange={(page) => onPagingChange(page)} />}
+          columns={mockColumns as { title: string, column: Exclude<keyof Order, "orders" | "tableInfo"> }[]} // 这里未了避免类型校验报错我强行同化了类型 再解决了上面的类型冲突后这里要去掉恢复到正常校验
+          orders={list}
+          tableHeader={tableHeader}
+          tableHeaderPlaceholder={tableHeaderPlaceholder}
+          paging={<Paging current={currentPage} total={totalPage} onChange={(page) => onPagingChange(page)} />}
         />
     </>)
 };

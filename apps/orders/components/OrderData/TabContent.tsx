@@ -29,6 +29,7 @@ import {DetailsModalProps} from "@/components/base/types";
 import {renderDetailsModalItem} from "@/components/OrderData/Render";
 import {useRouter} from "next/router";
 import {TabsDataItem} from "@/components/OrderData/type";
+import {isOrders} from "@/components/OrderData/data/FilterData";
 
 /**
  * 3.29 目前存在问题
@@ -76,7 +77,7 @@ export const TabContent: React.FC<IOrderDataTabContentProps> = ({
 
   let tabs:TabsDataItem[]=getRetailAnalyticsTabsData();
   let {tab:queryTabName=tabs[0].name}=route.query;
-
+  const _isOrders=isOrders(queryTabName as string);
   const onPagingChange = (pageIndex: number) => {
     setOrderDataParams({
       ...orderDataParams,
@@ -97,6 +98,7 @@ export const TabContent: React.FC<IOrderDataTabContentProps> = ({
 
 
   const openCurrentDetailsYModal=()=>{
+    if(_isOrders)return;
     const renderItem=(colKey:string, value:number, item:any)=>{
       return (['orders'].includes(item.type)?value:priceFormat(value)).toString();
     };
@@ -119,6 +121,14 @@ export const TabContent: React.FC<IOrderDataTabContentProps> = ({
   }
   console.log(moment,'12321');
   const openCurrentDetailsXYModal=(props:DetailsModalProps,range:string[],fx:{values:FxValue,params?:Record<string, any>}={values:FxValue.X},stores?:string[])=>{
+    if(_isOrders){
+      //跳转到orders页面
+      route.push({
+        pathname: `/order-data`,
+        query: { stores,tab:'orderDetailsList' }
+      });
+      return ;
+    }
     //需要给后台去统计
     const modalData={
       childrenProps:{
@@ -176,7 +186,7 @@ export const TabContent: React.FC<IOrderDataTabContentProps> = ({
         pageSize
       }
     }).then(async (res)=>{
-      let table=dataToStoresTabList(res.data.data.data,orderDataParams,openCurrentDetailsXYModal);
+      let table=dataToStoresTabList(res.data.data.data,orderDataParams,openCurrentDetailsXYModal,queryTabName as string);
       setColumns(table.columns);
       setFooter(table.footer);
       let {pageIndex}=res.data.data;
@@ -196,7 +206,7 @@ export const TabContent: React.FC<IOrderDataTabContentProps> = ({
       }).then(({data:res})=>{
         setFxValueY({loading:false,data:res.data });
       },()=>{
-        setFxValueY({loading: false,data: {totalPriceSumY:0,totalPriceMeanY:0}});
+        setFxValueY({loading: false,data: {totalSumY:0,totalMeanY:0}});
       })
     }else {
       setFxValueY({loading:false,data:null });
@@ -263,10 +273,10 @@ export const TabContent: React.FC<IOrderDataTabContentProps> = ({
       ></OrderListTable>
       <Box className={`absolute left-0 w-full bottom-12 flex justify-end bg-white h-6 ${!fxValueY.data?'hidden':''}`}>
         <Typography className={`w-44 text-center leading-6 border-0 border-l border-solid border-stone-300 cursor-pointer font-bold`} sx={{color:'primary.200'}} onClick={openCurrentDetailsYModal} level={`body-xs`}>
-          Total sum: {priceFormat(fxValueY.data?.totalPriceSumY)}
+          Total sum: {priceFormat(fxValueY.data?.totalSumY,_isOrders?'':'€',_isOrders?0:2)}
         </Typography>
         <Typography className={`w-44 text-center leading-6 border-0 border-l border-solid border-stone-300 cursor-pointer font-bold`} sx={{color:'neutral.540'}} onClick={openCurrentDetailsYModal} level={`body-xs`}>
-          Total mean: {priceFormat(fxValueY.data?.totalPriceMeanY)}
+          Total mean: {priceFormat(fxValueY.data?.totalMeanY,_isOrders?'':'€',_isOrders?0:2)}
         </Typography>
       </Box>
     </>

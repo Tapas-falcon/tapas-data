@@ -4,6 +4,7 @@
     "description": "Esta página utiliza mensajes de <code>./messages/about/{locale}.json</code> y <code>./messages/shared/{locale}.json</code>. Los mensajes de la página de inicio y de otras locales no se cargan.",
     "lastUpdated": "Este ejemplo ha sido actualizado {lastUpdatedRelative} ({lastUpdated, date, short}).",
 
+    "View": "Detalles",
     "Confirm": "Confirmar",
     "Cancel": "Cancelar",
     "Confirm-pay": "Confirmar y pagar",
@@ -14,6 +15,7 @@
     "Quantity": "La cantidad",
     "Total": "Total",
     "TOTAL": "TOTAL",
+    "RequestFailed": "Solicitud fallida",
 
     "OrderList": "Lista de pedidos",
     "WithdrawCash": "Retirar dinero en efectivo",
@@ -52,16 +54,23 @@
     "discountPercentage": "{value}% Apagada",
     "discountMenony": "€{value} Apagada"
   },
-  "order":{
+  "order": {
     "orderInfo": "Información del pedido",
     "createdBy": "Creado por",
     "checkoutAndPay": "Verificar & pagar",
     "IVA": "IVA%",
     "BASEIMP": "BASE IMP",
-    "IMPIVA": "IMP IVA"
+    "IMPIVA": "IMP IVA",
+    "OrderSuccess": "¡El pedido se realizó correctamente!",
+    "OrderFailed": "El pedido falló, inténtelo de nuevo más tarde",
+    "OrderSubmited": "Pedido enviado"
   },
   "dailySettlement": {
     "Title": "Informe de ingresos del día",
+    "ReportByAnyone": "Reportado por cualquiera",
+    "AllReportStatus": "Todos los estados de los informes",
+    "DateOfReport": "Fecha del informe: cualquiera",
+    "PageTotal": "Total: {num}",
     "ReportID": "ID de informe",
     "TodayIncome": "Ingresos de hoy",
     "TotalPOSIncome": "Ingresos totales POS",
@@ -83,12 +92,29 @@
     "ProductRecordsDesc": "Una vez enviado, podrás añadir más productos hasta el día siguiente al mediodía.",
     "RevenueDetailsTitle": "Detalles de ingresos",
     "TotalCashIncomeLabel": "Ingresos totales en efectivo (Euros)",
+    "TotalCashRevenue": "Ingresos totales en efectivo",
     "TotalPOSRevenue": "Ingresos totales de POS",
-    "TotalCashWithDrawalEuro":"Retirada total de efectivo (euros)",
-    "DailyOPerationCash":"Efectivo de operación diaria (Euro)",
+    "TotalCashWithDrawalEuro": "Retirada total de efectivo (euros)",
+    "DailyOPerationCash": "Efectivo de operación diaria (Euro)",
     "AddExceededProductTitle": "Añadir uno o más productos excedidos",
     "BtnClearAll": "Limpiar Todo",
-    "BtnAddItems": "Añadir {num} artículos"
+    "BtnAddItems": "Añadir {num} artículos",
+    "AlertModalTitle": "El informe de hoy ya existe.",
+    "AlertModalDesc": "Sólo puede agregar un informe por día. Si desea volver a enviar un informe nuevo, comuníquese primero con su gerente.",
+    "AlertModalBtn": "Ver informe",
+    "SubmittedBy": "Enviado por",
+    "SubmittedOn": "Enviado el",
+    "CancelReport": "¿Cancelar informe?",
+    "BtnCancelReport": "Cancelar informe",
+    "CancelReportDesc": "Una vez cancelado, no se guardarán todos los datos.",
+    "SubmitRptFailedTitle": "¡Error al enviar el informe!",
+    "SubmitRptSuccessTitle": "Informe enviado",
+    "GetReportFailed": "Error al obtener el informe",
+    "GenerateNewReportFailed": "Error al generar un nuevo informe",
+    "GetReprotListFailed": "Error al obtener la lista de informes",
+    "SubmitReportWithError": "Se encontró un informe con un error de cálculo",
+    "SubmitReportWithErrorDesc": "El total de ingresos del informe no es igual a los ingresos totales de hoy. ¿Aún deseas continuar?",
+    "BtnSubmitReportWithError": "Ignorar y enviar"
   },
   "tableList": {
     "Ordering": "Pedido",
@@ -130,6 +156,13 @@
     "Any": "cualquier",
     "CreatedByAnyone": "Creado por cualquier persona",
     "CheckoutByAnyone": "Pago por cualquier persona",
-    "CancelledByAnyone": "Cancelado por cualquier persona"
+    "CancelledByAnyone": "Cancelado por cualquier persona",
+    "DiscountAmout": "Descuento",
+    "MembershipID": "ID de membresía"
+  },
+  "orderDetail": {
+    "OrderDetail": "Detalles del pedido",
+    "OrderInfo": "Información del pedido",
+    "TableInfo": "Información de la mesa"
   }
 }

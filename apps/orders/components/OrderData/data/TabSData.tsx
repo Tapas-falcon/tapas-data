@@ -13,6 +13,7 @@ import {priceFormat} from "@/utils";
 import moment from "moment";
 import {Box, Typography} from "@mui/joy";
 import {DetailsModalProps} from "@/components/base/types";
+import {isOrders} from "@/components/OrderData/data/FilterData";
 
 export enum OrderDetailsEnum {
   List="orderDetailsList",
@@ -24,15 +25,15 @@ export const getRetailAnalyticsTabsData=():TabsDataItem[]=>{
   const tabSData:TabsDataItem[]=[
     {name:"Revenue",context:null,},
     {name:"Orders",context:null,},
-    {name:"ConsumptionCost",context:null,},
-    {name:"LaborCost",context:null,},
-    {name:"PurchaseCost",context:null,},
-    {name:"Profit",context:null,},
-    {name:"FixedCost",context:null,},
-    {name:"AccountingErrors",context:null,},
-    {name:OrderDetailsEnum.List,context:null,columns:[{title:"orderid",column:"orderId",tdProps:{onClick:()=>{
-            route.push(`/order-data?tab=orderDetails&id=1`);
-          }}}]},
+    // {name:"ConsumptionCost",context:null,},
+    // {name:"LaborCost",context:null,},
+    // {name:"PurchaseCost",context:null,},
+    // {name:"Profit",context:null,},
+    // {name:"FixedCost",context:null,},
+    // {name:"AccountingErrors",context:null,},
+    // {name:OrderDetailsEnum.List,context:null,columns:[{title:"orderid",column:"orderId",tdProps:{onClick:()=>{
+    //         route.push(`/order-data?tab=orderDetails&id=1`);
+    //       }}}]},
     //{name:"orderDetails",context:null},
 
   ];
@@ -42,7 +43,14 @@ export const getRetailAnalyticsTabsData=():TabsDataItem[]=>{
 export const belongToOrderDetailTabs=(name:OrderDetailsEnum)=>{
   return Object.values(OrderDetailsEnum).includes(name);
 }
-export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, any>, openCurrentDetailsModal: (props: DetailsModalProps, range: string[], fx: { values: FxValue; params?: Record<string, any> },stores?:string[])=>void):TabDataTable=>{
+export const dataToStoresTabList=(
+  data:any[]=[],
+  orderDataParams:Record<string, any>,
+  openCurrentDetailsModal: (props: DetailsModalProps, range: string[], fx: { values: FxValue; params?: Record<string, any> }, stores?:string[])=>void,
+  page:string
+):TabDataTable=>{
+  const _isOrders = isOrders(page);
+
   let table:TabDataTable={
     columns:[
       {title:"",column:"primaryKey",thProps:{width:200,className:"text-left"},tdProps:{className:"text-left"},renderItem:(...args)=>renderDateItem(...args,orderDataParams)},
@@ -51,11 +59,10 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
     footer:[]
   }
   let columnsBase={
-    renderItem:renderSumDetailsItem,
+    renderItem:(colKey:string, current:any, item:any)=>renderSumDetailsItem(colKey, current, item,page),
     thProps:{style: {textAlign:"right"}},
     tdProps:{style: {textAlign:"right"}}
   };
-
 
   data.forEach(item=>{
     let dataItem:TabListItem={
@@ -73,13 +80,11 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
             style: {textAlign:"right"},
             onClick:(colKey:string,value:any,item:any,columns:any[])=>{
               let data:any=item[colKey]||{value:0};
-              if(data.value>0){
-                openCurrentDetailsModal({
-                  name:moment(data.primaryKey).format(MOMENTFORMAT1),
-                  status:"Revenue",
-                  desc:moment(data.primaryKey).format(MOMENTFORMAT1),
-                },data.range,{values:FxValue.ONE},[data.id])
-              }
+              openCurrentDetailsModal({
+                name:moment(data.primaryKey).format(MOMENTFORMAT1),
+                status:"Revenue",
+                desc:moment(data.primaryKey).format(MOMENTFORMAT1),
+              },data.range,{values:FxValue.ONE},[data.id])
             }
           },
         })
@@ -87,8 +92,8 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
       ///assign一下 仅针对于行
       Object.assign(dataItem,{
         range:store.range,
-        totalPriceSumX:store.totalPriceSumX,
-        totalPriceMeanX:store.totalPriceMeanX,
+        totalSumX:store.totalSumX,
+        totalMeanX:store.totalMeanX,
       });
       let payments=store.payments||[];
       let paymentMethods=new Map();
@@ -97,9 +102,9 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
         let {paymentMethod,tax=[]}=payment;
         if(paymentMethod){
           if(!paymentMethods.has(paymentMethod)){
-            paymentMethods.set(paymentMethod,payment.totalPrice);
+            paymentMethods.set(paymentMethod,payment.total);
           }else {
-            paymentMethods.set(paymentMethod,(Number(paymentMethods.get(paymentMethod))+Number(payment.totalPrice)).toFixed(2));
+            paymentMethods.set(paymentMethod,(Number(paymentMethods.get(paymentMethod))+Number(payment.total)).toFixed(2));
           }
         }
 
@@ -122,7 +127,7 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
       })
       dataItem[store.id]= {
         ...store,
-        value:Number(store.totalPrice).toFixed(2),
+        value:store.total,
         details:details,
       }
     })
@@ -136,14 +141,14 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
         obj[cur.id]={
           storeName:cur.storeName,
           id:cur.id,
-          sum:cur.totalPriceSumY,
-          mean:cur.totalPriceMeanY
+          sum:cur.totalSumY,
+          mean:cur.totalMeanY
         };
       }
       let o=obj[cur.id];
       if(!o.default){
-        o.sum=cur.totalPriceSumY;
-        o.mean=cur.totalPriceMeanY;
+        o.sum=cur.totalSumY;
+        o.mean=cur.totalMeanY;
       }
       return obj;
     },{});
@@ -191,7 +196,7 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
               )
             }
             return  (
-              <Col sum={priceFormat(item.sum,'')} key={index} mean={priceFormat(item.mean,'')}  tdProps={{className:"text-right",onClick:openCurrentDetailsYModal}}/>
+              <Col sum={priceFormat(item.sum,'',_isOrders?0:2)} key={index} mean={priceFormat(item.mean,'',_isOrders?0:2)}  tdProps={{className:"text-right",onClick:openCurrentDetailsYModal}}/>
             )
           })
         }
@@ -207,9 +212,12 @@ export const dataToStoresTabList=(data:any[]=[], orderDataParams:Record<string, 
         desc:moment(item.primaryKey).format(MOMENTFORMAT1),
       },item.range,{values:FxValue.X})
     }
+    const renderPriceItem=(colKey:string, value:number, item:any)=>{
+      return priceFormat(value,item.unit||'',_isOrders?0:2).toString();
+    };
     table.columns.push(
-      {title:(<Typography  sx={{color:'primary.200'}} level={`body-xs`}>Sum (€)</Typography>),column:"totalPriceSumX",thProps:{width:70,className:"text-center  sticky right-[70px] z-0 i-t-sum",style:{color:"#895F38"}},tdProps:{className:"text-center sticky right-[70px] z-0 i-t-sum",onClick:openCurrentDetailsXModal,style:{color:"#895F38"}},renderItem:renderPriceItem},
-      {title:(<Typography  sx={{color:'neutral.540'}} level={`body-xs`}>Mean (€)</Typography>),column:"totalPriceMeanX",thProps:{width:70,className:"text-center  sticky right-0 z-0  i-t-mean",style:{color:"#0000008A"}},tdProps:{className:"text-center  sticky right-0 z-0 i-t-mean",onClick:openCurrentDetailsXModal,style:{color:"#0000008A"}},renderItem:renderPriceItem},
+      {title:(<Typography  sx={{color:'primary.200'}} level={`body-xs`}>Sum (€)</Typography>),column:"totalSumX",thProps:{width:70,className:"text-center  sticky right-[70px] z-0 i-t-sum",style:{color:"#895F38"}},tdProps:{className:"text-center sticky right-[70px] z-0 i-t-sum",onClick:openCurrentDetailsXModal,style:{color:"#895F38"}},renderItem:renderPriceItem},
+      {title:(<Typography  sx={{color:'neutral.540'}} level={`body-xs`}>Mean (€)</Typography>),column:"totalMeanX",thProps:{width:70,className:"text-center  sticky right-0 z-0  i-t-mean",style:{color:"#0000008A"}},tdProps:{className:"text-center  sticky right-0 z-0 i-t-mean",onClick:openCurrentDetailsXModal,style:{color:"#0000008A"}},renderItem:renderPriceItem},
     )
   }
 

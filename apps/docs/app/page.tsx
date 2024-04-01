@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Card } from "@tapas/ui/Card";
-import { Code } from "@tapas/ui/Code";
+import Card from "@tapas/ui/Card";
+import Code from "@tapas/ui/Code";
 import styles from "./page.module.css";
 
 function Gradient({
