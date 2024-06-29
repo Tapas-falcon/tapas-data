@@ -1,9 +1,0 @@
-**/node_modules
-Dockerfile
-.dockerignore
-npm-debug.log
-README.md
-.next
-docker
-.git
-.vscode
