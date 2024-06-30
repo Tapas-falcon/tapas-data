@@ -2,7 +2,8 @@
   "common": {
     "button": {
       "ok": "OK",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "reset": "Reset"
     },
     "placeholer": {
       "search": "Search"

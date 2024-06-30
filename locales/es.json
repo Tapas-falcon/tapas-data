@@ -2,7 +2,8 @@
   "common": {
     "button": {
       "ok": "Bien",
-      "cancel": "Cancelar"
+      "cancel": "Cancelar",
+      "reset": "Reiniciar"
     },
     "placeholer": {
       "search": "Buscar"
