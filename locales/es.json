@@ -1,0 +1,16 @@
+{
+  "common": {
+    "button": {
+      "ok": "Bien",
+      "cancel": "Cancelar"
+    },
+    "placeholer": {
+      "search": "Buscar"
+    }
+  },
+  "retail": {
+    "label": {
+      "retailAnalytics": "Análisis minorista"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "common": {
+    "button": {
+      "ok": "确定",
+      "cancel": "取消"
+    },
+    "placeholer": {
+      "search": "搜索"
+    }
+  },
+  "retail": {
+    "label": {
+      "retailAnalytics": "零售分析"
+    }
+  }
+}

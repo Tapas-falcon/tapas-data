@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "tapas-prod",
+    "slug": "tapas-prod",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo_no_word.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo_no_word.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}

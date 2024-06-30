@@ -1,0 +1,16 @@
+{
+  "common": {
+    "button": {
+      "ok": "OK",
+      "cancel": "Cancel"
+    },
+    "placeholer": {
+      "search": "Search"
+    }
+  },
+  "retail": {
+    "label": {
+      "retailAnalytics": "Retail Analytics"
+    }
+  }
+}
