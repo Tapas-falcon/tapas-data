@@ -3,8 +3,8 @@ import { View } from "react-native";
 
 import { withTheme } from "@beppla/tapas-ui";
 
-const OrdersContainer: React.FC = ({ theme }: { theme: any }) => {
+const PageInfo: React.FC = ({ theme }: { theme: any }) => {
   return <View></View>;
 };
 
-export default withTheme(OrdersContainer);
+export default withTheme(PageInfo);

@@ -5,14 +5,14 @@ import { useRecoilState } from "recoil";
 
 import { Tab, Text, TabView, withTheme, Divider } from "@beppla/tapas-ui";
 import { selRetailAnalyticsState } from "../state/selector";
-import RevenueContainer from "../components/revenue/RevenueContainer";
-import OrdersContainer from "../components/orders/OrdersContainer";
-import ConsumptionCostContainer from "../components/consumption/ConsumptionCostContainer";
-import LaborCostContainer from "../components/labor/LaborCostContainer";
-import PurchaseCostContainer from "../components/purchase/PurchaseCostContainer";
-import ProfitContainer from "../components/profit/ProfitContainer";
-import FixedCostContainer from "../components/fixed/FixedCostContainer";
-import AccountingErrorsContainer from "../components/accountingErrors/AccountingErrorsContainer";
+import RevenueContainer from "../components/retail/revenue/RevenueContainer";
+import OrdersContainer from "../components/retail/orders/OrdersContainer";
+import ConsumptionCostContainer from "../components/retail/consumption/ConsumptionCostContainer";
+import LaborCostContainer from "../components/retail/labor/LaborCostContainer";
+import PurchaseCostContainer from "../components/retail/purchase/PurchaseCostContainer";
+import ProfitContainer from "../components/retail/profit/ProfitContainer";
+import FixedCostContainer from "../components/retail/fixed/FixedCostContainer";
+import AccountingErrorsContainer from "../components/retail/accountingErrors/AccountingErrorsContainer";
 
 const TabTtile = withTheme(
   ({ theme, text }: { theme?: any; text?: string }) => (
