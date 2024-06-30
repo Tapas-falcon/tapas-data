@@ -11,6 +11,71 @@
   "retail": {
     "label": {
       "retailAnalytics": "Análisis minorista"
+    },
+    "revenue": {
+      "label": {
+        "tabTitle": "Ganancia"
+      }
+    },
+    "orders": {
+      "label": {
+        "tabTitle": "Pedidos"
+      }
+    },
+    "consumptionCost": {
+      "label": {
+        "tabTitle": "Costo de consumo"
+      }
+    },
+    "laborCost": {
+      "label": {
+        "tabTitle": "Coste laboral"
+      }
+    },
+    "purchaseCost": {
+      "label": {
+        "tabTitle": "Costo de la compra"
+      }
+    },
+    "profit": {
+      "label": {
+        "tabTitle": "Ganancia"
+      }
+    },
+    "fixedCost": {
+      "label": {
+        "tabTitle": "Costo Fijo"
+      }
+    },
+    "accountingErrors": {
+      "label": {
+        "tabTitle": "Errores contables"
+      }
+    }
+  },
+  "product": {
+    "label": {
+      "productAnalytics": "Análisis de productos"
+    },
+    "salesVolume": {
+      "label": {
+        "tabTitle": "El volumen de ventas"
+      }
+    },
+    "revenue": {
+      "label": {
+        "tabTitle": "Ganancia"
+      }
+    },
+    "consumptionCost": {
+      "label": {
+        "tabTitle": "Costo de consumo"
+      }
+    },
+    "profit": {
+      "label": {
+        "tabTitle": "Ganancia"
+      }
     }
   }
 }

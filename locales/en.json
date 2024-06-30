@@ -11,6 +11,71 @@
   "retail": {
     "label": {
       "retailAnalytics": "Retail Analytics"
+    },
+    "revenue": {
+      "label": {
+        "tabTitle": "Revenue"
+      }
+    },
+    "orders": {
+      "label": {
+        "tabTitle": "Orders"
+      }
+    },
+    "consumptionCost": {
+      "label": {
+        "tabTitle": "Consumption Cost"
+      }
+    },
+    "laborCost": {
+      "label": {
+        "tabTitle": "Labor Cost"
+      }
+    },
+    "purchaseCost": {
+      "label": {
+        "tabTitle": "Purchase Cost"
+      }
+    },
+    "profit": {
+      "label": {
+        "tabTitle": "Profit"
+      }
+    },
+    "fixedCost": {
+      "label": {
+        "tabTitle": "Fixed Cost"
+      }
+    },
+    "accountingErrors": {
+      "label": {
+        "tabTitle": "Accounting Errors"
+      }
+    }
+  },
+  "product": {
+    "label": {
+      "productAnalytics": "Product analytics"
+    },
+    "salesVolume": {
+      "label": {
+        "tabTitle": "Sales Volume"
+      }
+    },
+    "revenue": {
+      "label": {
+        "tabTitle": "Revenue"
+      }
+    },
+    "consumptionCost": {
+      "label": {
+        "tabTitle": "Consumption Cost"
+      }
+    },
+    "profit": {
+      "label": {
+        "tabTitle": "Profit"
+      }
     }
   }
 }

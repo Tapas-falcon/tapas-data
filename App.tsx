@@ -17,11 +17,15 @@ import {
 } from "@beppla/tapas-ui";
 import { getAuthToken } from "./src/apis/auth";
 import Retail from "./src/screens/Retail";
+import Product from "./src/screens/Product";
 import "./i18n";
 
 const Drawer = createDrawerNavigator();
 
-const navItems: any[] = [{ name: "Retail", iconName: "product_items" }];
+const navItems: any[] = [
+  { name: "Retail", iconName: "store" },
+  { name: "Product", iconName: "product-chart" },
+];
 
 const systemItems: any[] = [{ name: "Home", iconName: "home" }];
 
@@ -83,6 +87,11 @@ export default function App() {
                   options={{ title: t("retail.label.retailAnalytics") }}
                   name="Retail"
                   component={Retail}
+                />
+                <Drawer.Screen
+                  options={{ title: t("product.label.productAnalytics") }}
+                  name="Product"
+                  component={Product}
                 />
               </Drawer.Navigator>
             </NavigationContainer>

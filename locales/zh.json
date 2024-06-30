@@ -11,6 +11,71 @@
   "retail": {
     "label": {
       "retailAnalytics": "零售分析"
+    },
+    "revenue": {
+      "label": {
+        "tabTitle": "收入"
+      }
+    },
+    "orders": {
+      "label": {
+        "tabTitle": "订单"
+      }
+    },
+    "consumptionCost": {
+      "label": {
+        "tabTitle": "原料成本"
+      }
+    },
+    "laborCost": {
+      "label": {
+        "tabTitle": "人力成本"
+      }
+    },
+    "purchaseCost": {
+      "label": {
+        "tabTitle": "购买成本"
+      }
+    },
+    "profit": {
+      "label": {
+        "tabTitle": "利润"
+      }
+    },
+    "fixedCost": {
+      "label": {
+        "tabTitle": "固定成本"
+      }
+    },
+    "accountingErrors": {
+      "label": {
+        "tabTitle": "会计错误"
+      }
+    }
+  },
+  "product": {
+    "label": {
+      "productAnalytics": "产品分析"
+    },
+    "salesVolume": {
+      "label": {
+        "tabTitle": "销售数量"
+      }
+    },
+    "revenue": {
+      "label": {
+        "tabTitle": "收入"
+      }
+    },
+    "consumptionCost": {
+      "label": {
+        "tabTitle": "原料成本"
+      }
+    },
+    "profit": {
+      "label": {
+        "tabTitle": "利润"
+      }
     }
   }
 }
