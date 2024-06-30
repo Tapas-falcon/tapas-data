@@ -5,6 +5,10 @@ import { useRecoilState } from "recoil";
 
 import { Tab, Text, TabView, withTheme, Divider } from "@beppla/tapas-ui";
 import { selProductAnalyticsState } from "../state/selector";
+import SalesVolumeContainer from "../components/prouct/sales/SalesVolumeContainer";
+import RevenueContainer from "../components/prouct/revenue/RevenueContainer";
+import ConsumptionCostContainer from "../components/prouct/consumption/ConsumptionCostContainer";
+import ProfitContainer from "../components/prouct/profit/ProfitContainer";
 
 const TabTtile = withTheme(
   ({ theme, text }: { theme?: any; text?: string }) => (
@@ -57,10 +61,10 @@ const Product: React.FC = ({ theme }: { theme: any }) => {
         onChange={setTabIndex}
         animationType="spring"
       >
-        <TabView.Item style={styles.wFull}></TabView.Item>
-        <TabView.Item style={styles.wFull}>orders</TabView.Item>
-        <TabView.Item style={styles.wFull}>consumptionCost</TabView.Item>
-        <TabView.Item style={styles.wFull}>laborCost</TabView.Item>
+        <TabView.Item style={styles.wFull}><SalesVolumeContainer /></TabView.Item>
+        <TabView.Item style={styles.wFull}><RevenueContainer /></TabView.Item>
+        <TabView.Item style={styles.wFull}><ConsumptionCostContainer /></TabView.Item>
+        <TabView.Item style={styles.wFull}><ProfitContainer /></TabView.Item>
       </TabView>
     </View>
   );
