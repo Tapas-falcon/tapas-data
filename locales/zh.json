@@ -3,10 +3,12 @@
     "button": {
       "ok": "确定",
       "cancel": "取消",
-      "reset": "重置"
+      "reset": "重置",
+      "clearAll": "清除所有"
     },
-    "placeholer": {
-      "search": "搜索"
+    "placeholder": {
+      "search": "搜索",
+      "noData": "无数据"
     }
   },
   "retail": {
@@ -15,7 +17,8 @@
     },
     "revenue": {
       "label": {
-        "tabTitle": "收入"
+        "tabTitle": "收入",
+        "allStores": "所有商店"
       }
     },
     "orders": {

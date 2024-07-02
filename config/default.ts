@@ -1,6 +1,6 @@
 const defaultProxyConfig = {
-    '/api': {
-        target: 'http://47.120.65.56:8069',
+    '/': {
+        target: 'http://localhost:4080', //'http://47.120.65.56:8069',
         changeOrigin: true,
         pathRewrite: {
             '^/api': ''

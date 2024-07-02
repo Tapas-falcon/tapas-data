@@ -20,3 +20,14 @@ export interface pageInfo {
     page: number;
     totalPage: number;
 }
+
+export interface queryReq {
+    pageInfo: {
+      pageSize?: number;
+      pageIndex?: number;
+    };
+    filters?: Filter[];
+    sorts?: Sort<string>[];
+    search?: { value: string; searchBy: string[]; and?: boolean };
+    lang: LanguageCode;
+  }

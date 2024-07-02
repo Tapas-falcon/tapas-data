@@ -5,6 +5,7 @@ import { t } from "i18next";
 import { TapasButton, TapasCustomDropdown, withTheme } from "@beppla/tapas-ui";
 import { FilterKeys } from "./type";
 import { isMobile } from "../../../utils/common";
+import StoreList from "./components/Stories";
 
 const ListHeader: React.FC = ({ theme }: { theme: any }) => {
   const [visible, setVisible] = useState<keyof typeof FilterKeys | "">("");
@@ -25,15 +26,13 @@ const ListHeader: React.FC = ({ theme }: { theme: any }) => {
               setVisible(visible === FilterKeys.store ? "" : FilterKeys.store)
             }
             onClose={() => setVisible("")}
-            isVisible={visible === FilterKeys.store}
+            isVisible={true}
             width={123}
             // @ts-ignore
             subWidth={isMobile ? "100%" : 480}
             subContainerPosition={"left"}
           >
-            <View>
-              {/* <TapasCalendar languageCode="es" height={436} autoSize={false} /> */}
-            </View>
+            <StoreList />
           </TapasCustomDropdown>
         </View>
       </View>

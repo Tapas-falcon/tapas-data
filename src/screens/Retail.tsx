@@ -45,7 +45,7 @@ const Retail: React.FC = ({ theme }: { theme: any }) => {
     t("retail.accountingErrors.label.tabTitle"),
   ];
   return (
-    <View style={styles.con}>
+    <View style={{...styles.con, backgroundColor: theme.colors.background}}>
       <View style={styles.tabCon}>
         <Tab
           style={styles.tabInner}
@@ -69,28 +69,28 @@ const Retail: React.FC = ({ theme }: { theme: any }) => {
         onChange={setTabIndex}
         animationType="spring"
       >
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item key="retail-revenue" style={styles.wFull}>
           <RevenueContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item  key="retail-orders" style={styles.wFull}>
           <OrdersContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item  key="retail-consumption-cost" style={styles.wFull}>
           <ConsumptionCostContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item key="retail-labor-cost" style={styles.wFull}>
           <LaborCostContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item key="retail-purchase-cost" style={styles.wFull}>
           <PurchaseCostContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item key="retail-profit" style={styles.wFull}>
           <ProfitContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item key="retail-fixed-cost" style={styles.wFull}>
           <FixedCostContainer />
         </TabView.Item>
-        <TabView.Item style={styles.wFull}>
+        <TabView.Item key="retail-accounting-error" style={styles.wFull}>
           <AccountingErrorsContainer />
         </TabView.Item>
       </TabView>

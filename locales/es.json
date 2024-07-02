@@ -3,10 +3,12 @@
     "button": {
       "ok": "Bien",
       "cancel": "Cancelar",
-      "reset": "Reiniciar"
+      "reset": "Reiniciar",
+      "clearAll": "Limpiar todo"
     },
-    "placeholer": {
-      "search": "Buscar"
+    "placeholder": {
+      "search": "Buscar",
+      "noData": "Sin datos"
     }
   },
   "retail": {
@@ -15,7 +17,8 @@
     },
     "revenue": {
       "label": {
-        "tabTitle": "Ganancia"
+        "tabTitle": "Ganancia",
+        "allStores": "Todas las tiendas"
       }
     },
     "orders": {

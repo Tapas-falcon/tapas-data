@@ -3,10 +3,12 @@
     "button": {
       "ok": "OK",
       "cancel": "Cancel",
-      "reset": "Reset"
+      "reset": "Reset",
+      "clearAll": "Clear all"
     },
-    "placeholer": {
-      "search": "Search"
+    "placeholder": {
+      "search": "Search",
+      "noData": "No data"
     }
   },
   "retail": {
@@ -15,7 +17,8 @@
     },
     "revenue": {
       "label": {
-        "tabTitle": "Revenue"
+        "tabTitle": "Revenue",
+        "allStores": "All Stores"
       }
     },
     "orders": {
